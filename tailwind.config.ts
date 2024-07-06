@@ -21,6 +21,9 @@ const config: Config = {
       colors: {
         "text-title": "#DB4444",
       },
+      flex: {
+        "1-1-50": "1 1 50%",
+      },
     },
   },
   plugins: [flowbite.plugin()],

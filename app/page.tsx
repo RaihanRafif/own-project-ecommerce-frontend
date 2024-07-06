@@ -206,9 +206,78 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="itemsSlider w-full h-[385px] pl-[135px] overflow-x-hidden ">
+          <ItemSlider items={items} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+        </div>
+
+        {/* <div className="border-b mx-[135px] mb-[70px] pb-[70px]"></div> */}
+      </div>
+
+      <div className="row mt-[140px] px-[135px]">
+        <div className="parent  bg-black h-[500px] w-full flex ">
+          <div className="flex-1-1-50 text-white pl-14 pt-[69px]">
+            <div className="categories text-[#00FF66] text-base font-semibold">
+              Categories
+            </div>
+            <div className="title text-5xl font-semibold mt-8">
+              Enhance Your Music Experience
+            </div>
+            <div className="countdown flex gap-6 mt-8">
+              <div className="hours bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
+                <div className="number text-base text-black font-semibold text-center">23</div>
+                <div className="title text-center text-[11px] text-black font-medium">Hours</div>
+              </div>
+              <div className="days bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
+                <div className="number text-base text-black font-semibold text-center">05</div>
+                <div className="title text-center text-[11px] text-black font-medium">Days</div>
+              </div>
+              <div className="minutes bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
+                <div className="number text-base text-black font-semibold text-center">59</div>
+                <div className="title text-center text-[11px] text-black font-medium">Minutes</div>
+              </div>
+              <div className="seconds bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
+                <div className="number text-base text-black font-semibold text-center">35</div>
+                <div className="title text-center text-[11px] text-black font-medium">Seconds</div>
+              </div>
+            </div>
+            <div className="green-button bg-[#00FF66] rounded h-14 w-[171px] flex items-center justify-center mt-10 hover:cursor-pointer">
+              Buy Now
+            </div>
+          </div>
+          <div className="flex-1-1-50 text-white pr-11 relative h-[500px] w-[500px]">
+            <div className="absolute inset-0 rounded-full bg-slate-500 blur-[200px]"></div>
+            <img className="relative object-scale-down h-full w-full rounded-full pt-[82px]" src="/images/speaker.png" alt="" />
+          </div>
+
+        </div>
+      </div>
+
+      <div className="row mt-[71px]">
+        <div className="titleSection px-[135px] flex items-center text-center">
+          <div className="redBlock w-5 h-10 bg-red-500 rounded"></div>
+          <div className="title text-center ml-2 text-[#DB4444] text-base font-semibold">
+            Our Products
+          </div>
+        </div>
+        <div className="headerTitle flex mt-8 px-[135px]">
+          <div className="title text-4xl font-semibold">
+            Explore Our Products
+          </div>
+          <div className="buttonNav ml-auto flex gap-2">
+            <div className="leftButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full" >
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </div>
+            <div className="rightButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full" >
+              <FontAwesomeIcon icon={faArrowRight} />
+            </div>
+          </div>
+        </div>
+
         <div className="itemsSlider w-full h-[385px] pl-[135px] overflow-x-hidden">
           <ItemSlider items={items} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
         </div>
+
+        <div className="border-b mx-[135px] mb-[70px]"></div>
       </div>
 
     </div>
