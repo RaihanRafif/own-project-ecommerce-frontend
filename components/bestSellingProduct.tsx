@@ -2,58 +2,11 @@ import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 
-const ItemSlider = ({ items, currentIndex, setCurrentIndex, stack }: any) => {
-  const sliderRef = useRef(null);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragging, setDragging] = useState(false);
-
-  const handleDragStart = (e: any) => {
-    setDragStartX(e.clientX);
-    setDragging(true);
-  };
-
-  const handleDragEnd = (e: any) => {
-    if (!dragging) return;
-    const dragEndX = e.clientX;
-    const dragDistance = dragStartX - dragEndX;
-
-    if (dragDistance > 50) {
-      setCurrentIndex((prevIndex: any) =>
-        prevIndex === items.length - 5 ? 0 : prevIndex + 1
-      );
-    } else if (dragDistance < -50) {
-      setCurrentIndex((prevIndex: any) =>
-        prevIndex === 0 ? items.length - 5 : prevIndex - 1
-      );
-    }
-
-    setDragging(false);
-  };
-
-  const handleDragOver = (e: any) => {
-    if (dragging) {
-      e.preventDefault();
-    }
-  };
-
-
+const BestSellingProduct = ({ items }: any) => {
   return (
-    <div
-      className="relative w-full"
-      ref={sliderRef}
-      onMouseDown={(e) => handleDragStart(e)}
-      onMouseUp={(e) => handleDragEnd(e)}
-      onMouseLeave={(e) => handleDragEnd(e)}
-      onMouseMove={dragging ? handleDragOver : undefined}
-      onTouchStart={(e) => handleDragStart(e.touches[0])}
-      onTouchEnd={(e) => handleDragEnd(e.changedTouches[0])}
-      onTouchMove={dragging ? handleDragOver : undefined}
-    >
-      <div
-        className="flex w-full gap-5 transition-transform duration-300 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * (100 / 5)}%)` }}
-      >
-        {items.map((item: any) => (
+    <div className="relative w-full h-full overflow-x-hidden">
+      <div className="flex gap-5 transition-transform duration-300 ease-in-out">
+        {items.slice(0, 5).map((item: any) => (
           <div key={item.id} className="h-80">
             <div
               className="relative w-64 h-64 bg-gray-200 mr-4 mt-10 group cursor-pointer"
@@ -86,4 +39,4 @@ const ItemSlider = ({ items, currentIndex, setCurrentIndex, stack }: any) => {
   );
 };
 
-export default ItemSlider;
+export default BestSellingProduct;

@@ -1,40 +1,35 @@
 "use client";
 
-import { faAngleRight, faArrowLeft, faArrowRight, faDesktop, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Carousel } from "flowbite-react";
 import Image from 'next/image';
-import { useState } from 'react';
-import { faker } from '@faker-js/faker';
+import { useEffect, useState } from 'react';
 import ItemSlider from '@/components/ItemSlider';
-import { faMobileScreen } from '@fortawesome/free-solid-svg-icons/faMobileScreen';
-import { IoWatchOutline } from "react-icons/io5";
-import { IoIosDesktop } from "react-icons/io";
 import { GiSmartphone } from "react-icons/gi";
+import { IoWatchOutline, IoGameControllerOutline } from "react-icons/io5";
+import { IoIosDesktop } from "react-icons/io";
 import { CiCamera } from "react-icons/ci";
 import { FiHeadphones } from "react-icons/fi";
-import { IoGameControllerOutline } from "react-icons/io5";
+import BestSellingProduct from '@/components/bestSellingProduct';
+import ExploreOurProducts from '@/components/exploreOurProducts';
 
 export default function Home() {
-  const generateItems = (numItems: number) => {
-    const items = [];
-    for (let i = 1; i <= numItems; i++) {
-      let price = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
-      let discount = Math.floor(Math.random() * 50) + 1;
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-      items.push({
-        id: i,
-        name: faker.commerce.product(),
-        discount: discount,
-        price: price,
-        review: Math.random(),
-        image: `https://via.placeholder.com/270x350.png?text=Product+${i}`
+  useEffect(() => {
+    fetch('https://dummyjson.com/products')
+      .then(res => res.json())
+      .then(data => {
+        setItems(data.products); // Assuming the response has a "products" key
+        setLoading(false);
+
       });
-    }
-    return items;
-  };
+  }, []);
 
-  const items = generateItems(15);
+  console.log(items);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextFlashSaleSlide = () => {
@@ -61,6 +56,30 @@ export default function Home() {
     );
   };
 
+  const [startExploreIndex, setStartExploreIndex] = useState(0);
+  const [endExploreIndex, setEndExploreIndex] = useState(10);
+
+  const nextExploreItems = () => {
+    if (endExploreIndex < items.length) {
+      setStartExploreIndex(prevIndex => prevIndex + 10);
+      setEndExploreIndex(prevIndex => prevIndex + 10);
+    }
+  };
+
+  const previousExploreItems = () => {
+    if (startExploreIndex > 0) {
+      setStartExploreIndex(prevIndex => prevIndex - 10);
+      setEndExploreIndex(prevIndex => prevIndex - 10);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="">
@@ -152,48 +171,49 @@ export default function Home() {
             Browse By Category
           </div>
           <div className="buttonNav ml-auto flex gap-2">
-            <div className="leftButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full" >
+            <div className="leftButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full">
               <FontAwesomeIcon icon={faArrowLeft} />
             </div>
-            <div className="rightButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full" >
+            <div className="rightButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full">
               <FontAwesomeIcon icon={faArrowRight} />
             </div>
           </div>
         </div>
         <div className="itemsSlider w-full h-full overflow-x-hidden flex justify-between pt-[60px] pb-[60px] pl-[135px] pr-[135px]">
-          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] transition-all duration-200 cursor-pointer">
-            <GiSmartphone className="group-hover:text-white" style={{ width: '56px', height: '56px' }} />
-            <p className='text-base pt-[16px] group-hover:text-white'>Phones</p>
+          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] hover:text-white cursor-pointer">
+            <GiSmartphone size={30} className="mb-3 group-hover:text-white" />
+            <p>Smartphones</p>
           </div>
-          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] transition-all duration-200 cursor-pointer">
-            <IoIosDesktop className="group-hover:text-white" style={{ width: '56px', height: '56px' }} />
-            <p className='text-base pt-[16px] group-hover:text-white'>Computers</p>
+          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] hover:text-white cursor-pointer">
+            <IoWatchOutline size={30} className="mb-3 group-hover:text-white" />
+            <p>Watches</p>
           </div>
-          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] transition-all duration-200 cursor-pointer">
-            <IoWatchOutline className="group-hover:text-white" style={{ width: '56px', height: '56px' }} />
-            <p className='text-base pt-[16px] group-hover:text-white'>Smartwatch</p>
+          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] hover:text-white cursor-pointer">
+            <IoGameControllerOutline size={30} className="mb-3 group-hover:text-white" />
+            <p>Gaming</p>
           </div>
-          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] transition-all duration-200 cursor-pointer">
-            <CiCamera className="group-hover:text-white" style={{ width: '56px', height: '56px' }} />
-            <p className='text-base pt-[16px] group-hover:text-white'>Camera</p>
+          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] hover:text-white cursor-pointer">
+            <IoIosDesktop size={30} className="mb-3 group-hover:text-white" />
+            <p>Computers</p>
           </div>
-          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] transition-all duration-200 cursor-pointer">
-            <FiHeadphones className="group-hover:text-white" style={{ width: '56px', height: '56px' }} />
-            <p className='text-base pt-[16px] group-hover:text-white'>Headphone</p>
+          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] hover:text-white cursor-pointer">
+            <CiCamera size={30} className="mb-3 group-hover:text-white" />
+            <p>Cameras</p>
           </div>
-          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] transition-all duration-200 cursor-pointer">
-            <IoGameControllerOutline className="group-hover:text-white" style={{ width: '56px', height: '56px' }} />
-            <p className='text-base pt-[16px] group-hover:text-white'>Gaming</p>
+          <div className="group flex flex-col items-center justify-center border h-36 w-[170px] rounded border-gray-700 hover:bg-[#DB4444] hover:text-white cursor-pointer">
+            <FiHeadphones size={30} className="mb-3 group-hover:text-white" />
+            <p>Headphones</p>
           </div>
         </div>
-        <div className="border-b mx-[135px] mb-[70px]"></div>
+
+        <div className="border-b mx-[135px] mt-[60px] mb-[70px]"></div>
       </div>
 
       <div className="row">
         <div className="titleSection px-[135px] flex items-center text-center">
           <div className="redBlock w-5 h-10 bg-red-500 rounded"></div>
           <div className="title text-center ml-2 text-[#DB4444] text-base font-semibold">
-            This Month
+            Best Selling
           </div>
         </div>
         <div className="headerTitle flex mt-8 px-[135px]">
@@ -201,58 +221,20 @@ export default function Home() {
             Best Selling Products
           </div>
           <div className="buttonNav ml-auto flex gap-2">
-            <div className="button bg-[#DB4444] w-[234px] h-[56px] flex justify-center items-center ml-auto mr-auto text-white rounded cursor-pointer">
-              <p>View All</p>
+            <div className="leftButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full cursor-pointer" onClick={prevSellingSlide}>
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </div>
+            <div className="rightButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full cursor-pointer" onClick={nextSellingSlide}>
+              <FontAwesomeIcon icon={faArrowRight} />
             </div>
           </div>
         </div>
-        <div className="itemsSlider w-full h-[385px] pl-[135px] overflow-x-hidden ">
-          <ItemSlider items={items} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-        </div>
-
-        {/* <div className="border-b mx-[135px] mb-[70px] pb-[70px]"></div> */}
-      </div>
-
-      <div className="row mt-[140px] px-[135px]">
-        <div className="parent  bg-black h-[500px] w-full flex ">
-          <div className="flex-1-1-50 text-white pl-14 pt-[69px]">
-            <div className="categories text-[#00FF66] text-base font-semibold">
-              Categories
-            </div>
-            <div className="title text-5xl font-semibold mt-8">
-              Enhance Your Music Experience
-            </div>
-            <div className="countdown flex gap-6 mt-8">
-              <div className="hours bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
-                <div className="number text-base text-black font-semibold text-center">23</div>
-                <div className="title text-center text-[11px] text-black font-medium">Hours</div>
-              </div>
-              <div className="days bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
-                <div className="number text-base text-black font-semibold text-center">05</div>
-                <div className="title text-center text-[11px] text-black font-medium">Days</div>
-              </div>
-              <div className="minutes bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
-                <div className="number text-base text-black font-semibold text-center">59</div>
-                <div className="title text-center text-[11px] text-black font-medium">Minutes</div>
-              </div>
-              <div className="seconds bg-white rounded-full flex items-center justify-center flex-col w-[62px] h-[62px]">
-                <div className="number text-base text-black font-semibold text-center">35</div>
-                <div className="title text-center text-[11px] text-black font-medium">Seconds</div>
-              </div>
-            </div>
-            <div className="green-button bg-[#00FF66] rounded h-14 w-[171px] flex items-center justify-center mt-10 hover:cursor-pointer">
-              Buy Now
-            </div>
-          </div>
-          <div className="flex-1-1-50 text-white pr-11 relative h-[500px] w-[500px]">
-            <div className="absolute inset-0 rounded-full bg-slate-500 blur-[200px]"></div>
-            <img className="relative object-scale-down h-full w-full rounded-full pt-[82px]" src="/images/speaker.png" alt="" />
-          </div>
-
+        <div className="itemsSlider w-full h-[385px] pl-[135px] overflow-x-hidden">
+          <BestSellingProduct items={items} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
         </div>
       </div>
 
-      <div className="row mt-[71px]">
+      <div className="row">
         <div className="titleSection px-[135px] flex items-center text-center">
           <div className="redBlock w-5 h-10 bg-red-500 rounded"></div>
           <div className="title text-center ml-2 text-[#DB4444] text-base font-semibold">
@@ -264,21 +246,76 @@ export default function Home() {
             Explore Our Products
           </div>
           <div className="buttonNav ml-auto flex gap-2">
-            <div className="leftButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full" >
+            <div className="leftButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full cursor-pointer" onClick={previousExploreItems}>
               <FontAwesomeIcon icon={faArrowLeft} />
             </div>
-            <div className="rightButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full" >
+            <div className="rightButton w-[46px] h-[46px] flex items-center justify-center bg-[#F5F5F5] rounded-full cursor-pointer" onClick={nextExploreItems}>
               <FontAwesomeIcon icon={faArrowRight} />
             </div>
           </div>
         </div>
-
-        <div className="itemsSlider w-full h-[385px] pl-[135px] overflow-x-hidden">
-          <ItemSlider items={items} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+        <div className="itemsSlider w-full h-full overflow-x-hidden flex justify-between  pb-[60px] pl-[135px] pr-[135px]">
+          <ExploreOurProducts items={items.slice(startExploreIndex, endExploreIndex)} startExploreIndex={startExploreIndex} endExploreIndex={endExploreIndex} />
         </div>
 
-        <div className="border-b mx-[135px] mb-[70px]"></div>
+        <div className="button bg-[#DB4444] w-[234px] h-[56px] flex justify-center items-center ml-auto mr-auto text-white rounded cursor-pointer mt-[40px]">
+          <p>View All Products</p>
+        </div>
       </div>
+
+      <div className="row mt-32">
+        <div className="titleSection px-[135px] flex items-center text-center">
+          <div className="redBlock w-5 h-10 bg-red-500 rounded"></div>
+          <div className="title text-center ml-2 text-[#DB4444] text-base font-semibold">
+            Featured
+          </div>
+        </div>
+        <div className="headerTitle flex mt-8 px-[135px]">
+          <div className="title text-4xl font-semibold">
+            New Arrival
+          </div>
+
+        </div>
+        <div className="layoutNewArrival w-full pl-[135px] px-[135px] flex h-[600px] pt-[60px] gap-[30px]">
+          <div className="leftSide bg-black w-2/4 h-full text-white flex flex-col gap-3 pl-[30px] pb-[32px] relative">
+            <div className="absolute left-[110px] bottom-0">
+              <img src="/images/ps.png" className='' alt="" />
+            </div>
+
+            <div className="title mt-auto w-full z-10">
+              <p className='font-semibold text-[24px]'>PlayStation 5</p>
+              <p className=' w-80'>Black and White version of the PS5 coming out on sale.</p>
+            </div>
+
+            <div className="z-10">
+              <p className='underline font-medium text-[16px]'>Shop Now</p>
+            </div>
+          </div>
+          <div className="rightSide w-2/4 h-full flex flex-col gap-8">
+            <div className="top bg-black h-2/4 relative flex flex-col justify-center items-center text-white">
+              <div className="absolute left-1/4 bottom-0">
+                <img src="/images/woman-hat.png" className="h-[186px]" alt="Women's Collection" />
+              </div>
+
+              <div className="title mt-auto w-full z-10 text-center">
+                <p className='font-semibold text-[24px]'>Women’s Collections</p>
+                <p className='w-80'>Featured woman collections that give you another vibe.</p>
+              </div>
+
+              <div className="z-10 text-center">
+                <p className='underline font-medium text-[16px]'>Shop Now</p>
+              </div>
+            </div>
+
+            <div className="bottom h-2/4 w-full flex gap-[32px]">
+              <div className="left bg-yellow-400 w-2/4 h-full"></div>
+              <div className="right bg-cyan-600 w-2/4 h-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
     </div>
   );
