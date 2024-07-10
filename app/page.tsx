@@ -7,12 +7,15 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ItemSlider from '@/components/ItemSlider';
 import { GiSmartphone } from "react-icons/gi";
-import { IoWatchOutline, IoGameControllerOutline } from "react-icons/io5";
+import { IoWatchOutline, IoGameControllerOutline, IoShieldCheckmarkOutline } from "react-icons/io5";
 import { IoIosDesktop } from "react-icons/io";
-import { CiCamera } from "react-icons/ci";
+import { CiCamera, CiHeadphones, CiTwitter } from "react-icons/ci";
 import { FiHeadphones } from "react-icons/fi";
 import BestSellingProduct from '@/components/bestSellingProduct';
 import ExploreOurProducts from '@/components/exploreOurProducts';
+import { FaInstagram, FaTruckFast } from 'react-icons/fa6';
+import { TiSocialFacebook, TiSocialLinkedin } from 'react-icons/ti';
+import { FaRegCopyright } from 'react-icons/fa';
 
 export default function Home() {
   const [items, setItems] = useState([]);
@@ -288,34 +291,166 @@ export default function Home() {
             </div>
 
             <div className="z-10">
-              <p className='underline font-medium text-[16px]'>Shop Now</p>
+              <p className='underline font-medium text-[16px] hover:cursor-pointer w-fit'>Shop Now</p>
             </div>
           </div>
           <div className="rightSide w-2/4 h-full flex flex-col gap-8">
             <div className="top bg-black h-2/4 relative flex flex-col justify-center items-center text-white">
-              <div className="absolute left-1/4 bottom-0">
-                <img src="/images/woman-hat.png" className="h-[186px]" alt="Women's Collection" />
+              <div className="absolute left-2/4 bottom-0">
+                <img src="/images/woman-hat.png" className="h-[250px]" alt="Women's Collection" />
               </div>
 
-              <div className="title mt-auto w-full z-10 text-center">
+              <div className="title mt-auto w-full z-10 pl-6">
                 <p className='font-semibold text-[24px]'>Women’s Collections</p>
-                <p className='w-80'>Featured woman collections that give you another vibe.</p>
+                <p className='w-80 text-[16px] '>Featured woman collections that give you another vibe.</p>
               </div>
 
-              <div className="z-10 text-center">
-                <p className='underline font-medium text-[16px]'>Shop Now</p>
+              <div className="z-10 pl-6 w-full mb-6">
+                <p className='underline font-medium text-[16px] hover:cursor-pointer w-fit'>Shop Now</p>
               </div>
             </div>
 
             <div className="bottom h-2/4 w-full flex gap-[32px]">
-              <div className="left bg-yellow-400 w-2/4 h-full"></div>
-              <div className="right bg-cyan-600 w-2/4 h-full"></div>
+              <div className="left bg-black w-2/4 h-full relative flex flex-col">
+                <div className="absolute left-[80px] bottom-[20px] z-0">
+                  <img src="/images/speaker.png" className="h-[200px]" alt="Speaker" />
+                </div>
+
+                <div className="text-content relative z-10 mt-auto mb-6">
+                  <div className="title w-full text-white">
+                    <p className='font-semibold text-[24px] text-white ml-6 '>Speakers</p>
+                    <p className='w-auto ml-6'>Amazon wireless speakers</p>
+                  </div>
+
+                  <div className="z-10 w-full ml-6 text-white">
+                    <p className='underline font-medium text-[16px] hover:cursor-pointer w-fit'>Shop Now</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="right bg-black w-2/4 h-full relative flex flex-col">
+                <div className="absolute left-[80px] bottom-[20px] z-0">
+                  <img src="/images/parfum.png" className="h-[200px]" alt="parfum" />
+                </div>
+
+                <div className="text-content relative z-10 mt-auto mb-6">
+                  <div className="title w-full text-white">
+                    <p className='font-semibold text-[24px] text-white ml-6 '>Perfume</p>
+                    <p className='w-auto ml-6'>GUCCI INTENSE OUD EDP</p>
+                  </div>
+
+                  <div className="z-10 w-full ml-6 text-white">
+                    <p className='underline font-medium text-[16px] hover:cursor-pointer w-fit'>Shop Now</p>
+                  </div>
+                </div></div>
             </div>
           </div>
         </div>
       </div>
 
+      <div className="row mt-[140px] flex gap-[88px] w-full items-center justify-center">
+        <div className="item flex flex-col justify-center align-middle items-center">
+          <div className="icon rounded-full border-[10px] border-[#a8a8a8] w-[58px] h-[58px] bg-black text-white flex align-middle items-center justify-center text-[22px]">
+            <FaTruckFast />
+          </div>
+          <div className="title text-center mt-3">
+            <p className='font-semibold text-[20px] text-center'>FREE AND FAST DELIVERY</p>
+            <p className='text-[14px] text-center'>Free delivery for all orders over $140</p>
+          </div>
+        </div>
+        <div className="item flex flex-col justify-center align-middle items-center">
+          <div className="icon rounded-full border-[10px] border-[#a8a8a8] w-[58px] h-[58px] bg-black text-white flex align-middle items-center justify-center text-[22px]">
+            <CiHeadphones />
+          </div>
+          <div className="title text-center mt-3">
+            <p className='font-semibold text-[20px] text-center'>24/7 CUSTOMER SERVICE</p>
+            <p className='text-[14px] text-center'>Friendly 24/7 customer support</p>
+          </div>
+        </div>
+        <div className="item flex flex-col justify-center align-middle items-center">
+          <div className="icon rounded-full border-[10px] border-[#a8a8a8] w-[58px] h-[58px] bg-black text-white flex align-middle items-center justify-center text-[22px]">
+            <IoShieldCheckmarkOutline />
+          </div>
+          <div className="title text-center mt-3">
+            <p className='font-semibold text-[20px] text-center'>MONEY BACK GUARANTEE</p>
+            <p className='text-[14px] text-center'>We return money within 30 days</p>
+          </div>
+        </div>
+      </div>
 
+      <div className="row mt-[140px] flex w-full gap-20 text-white bg-black h-[440px] pt-20 justify-center">
+        <div className="max-content flex flex-col gap-6">
+          <p className='text-[24px] font-bold'>Exclusive</p>
+          <p>Subscribe</p>
+          <p>Get 10% off your first order</p>
+          <input type="text"></input>
+        </div>
+
+        <div className="w-44 flex flex-col gap-6">
+          <p className='text-[24px] font-bold'>Support</p>
+          <p>111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</p>
+          <p>exclusive@gmail.com</p>
+          <input type="text"></input>
+        </div>
+
+        <div className="w-44 flex flex-col gap-6">
+          <p className='text-[24px] font-bold'>Account</p>
+          <p>My Account</p>
+          <p>Login / Register</p>
+          <p>Cart</p>
+          <p>Wishlist</p>
+          <p>Shop</p>
+        </div>
+
+        <div className="w-44 flex flex-col gap-6">
+          <p className='text-[24px] font-bold'>Quick Link</p>
+          <p>Privacy Policy</p>
+          <p>Terms Of Use</p>
+          <p>FAQ</p>
+          <p>Wishlist</p>
+          <p>Contact</p>
+        </div>
+
+        <div className="min-w-max flex flex-col gap-6">
+          <p className='text-[24px] font-bold'>Download App</p>
+          <p className='opacity-75 text-xs'>Save $3 with App New User Only</p>
+          <div className="flex w-full justify-between">
+            <div className="left w-2/3 h-2/3">
+              <img src="/images/Qr Code.png" alt="" />
+            </div>
+            <div className="right flex flex-col justify-between ">
+              <div className="top ">
+                <img src="/images/playstore.png" alt="" />
+              </div>
+              <div className="bottom">
+                <img src="/images/download-appstore.png" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex w-full justify-between">
+            <div className="w-8 h-8 text-[24px]">
+              <TiSocialFacebook />
+            </div>
+            <div className="w-8 h-8 text-[24px]">
+              <CiTwitter />
+            </div>
+            <div className="w-8 h-8 text-[24px]">
+              <FaInstagram />
+            </div>
+            <div className="w-8 h-8 text-[24px]">
+              <TiSocialLinkedin />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div className="row flex align-middle items-center gap-2 justify-center bg-black text-[#4a4949] border-t-[1px] border-gray-600 pt-4 pb-4">
+        <FaRegCopyright />
+        <p>Copyright Rimel 2022. All right reserved</p>
+      </div>
 
     </div>
   );
