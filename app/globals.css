@@ -26,6 +26,10 @@
   padding: 0;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 
 @layer utilities {
   .text-balance {

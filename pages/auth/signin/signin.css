@@ -1,0 +1,16 @@
+.custom-input {
+    margin-top: 40px;
+    border: none;
+    border-bottom: 1px solid #D1D5DB; /* Equivalent to Tailwind's border-gray-300 */
+    outline: none;
+}
+
+.custom-input:focus {
+    border-bottom: 1px solid #D1D5DB; /* Keeps the border color the same on focus */
+    outline: none;
+    box-shadow: none; /* Removes any default focus shadow */
+}
+
+.custom-input:hover {
+    border-bottom: 1px solid #D1D5DB; /* Keeps the border color the same on hover */
+}
