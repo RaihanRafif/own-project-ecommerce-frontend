@@ -1,18 +1,25 @@
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
 
 const ExploreOurProducts = ({ items }: any) => {
     const firstStack = items.slice(0, 5);
     const secondStack = items.slice(5, 10);
+    const router = useRouter();
+
+    const getDetail = (itemId: any) => {
+        router.push(`/product/${itemId}`);
+    };
+
 
     return (
         <div className="relative w-full flex flex-col gap-[60px] ">
             <div className="flex justify-between">
                 {firstStack.map((item: any) => {
                     // console.log("TESSSS",item);
-                    
+
                     return (
-                        <div key={item.id} className="h-80 w-[256px]">
+                        <div key={item.id} className="h-80 w-[256px]" onClick={e => getDetail(item.id)}>
                             <div
                                 className="relative w-64 h-64 bg-gray-200 mr-4 mt-10 group cursor-pointer"
                                 style={{ backgroundImage: item.images !== null ? `url('${item.images[0]}')` : `url(https://dummyjson.com/image/400x200/008080/ffffff?text=${item.title.replace(/ /g, '+')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -45,7 +52,7 @@ const ExploreOurProducts = ({ items }: any) => {
             </div>
             <div className="flex justify-between">
                 {secondStack.map((item: any) => (
-                    <div key={item.id} className="h-80 w-[256px]">
+                    <div key={item.id} className="h-80 w-[256px]" onClick={e => getDetail(item.id)}>
                         <div
                             className="relative w-64 h-64 bg-gray-200 mr-4 mt-10 group cursor-pointer"
                             style={{ backgroundImage: item.images !== null ? `url('${item.images[0]}')` : `url(https://dummyjson.com/image/400x200/008080/ffffff?text=${item.title.replace(/ /g, '+')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}

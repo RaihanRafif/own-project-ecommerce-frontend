@@ -6,6 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { FaSearch } from 'react-icons/fa';
 
 export default function TopNav() {
     const pathname = usePathname();
@@ -15,8 +16,10 @@ export default function TopNav() {
 
     return (
         <header className="flex items-center px-[135px] py-[40px] h-10 border-b border-black">
-            <div className="mainIcon">
-                <h1 className="font-league-spartan text-[24px] font-extrabold">papayataha.</h1>
+            <div className="mainIcon" >
+                <Link href="/" className={`font-league-spartan text-[24px] font-extrabold`}>
+                    papayataha.
+                </Link>
             </div>
             <div className="navList flex gap-x-12 ml-auto">
                 <Link href="/" className={`${isActive('/') ? 'underline underline-offset-4' : ''} hover:cursor-pointer`}>
@@ -39,10 +42,7 @@ export default function TopNav() {
                     className="bg-slate-200 text-lg px-4 py-2 w-[280px] placeholder:text-slate-500 rounded"
                     style={{ fontSize: '18px' }}
                 />
-                <FontAwesomeIcon
-                    icon={faSearch}
-                    className="absolute right-2"
-                />
+                <FaSearch className="absolute right-2" />
             </div>
             {/* <div className="rightSide ml-24 flex gap-x-4">
                 <FontAwesomeIcon icon={faHeart} className="w-8 h-8"/>

@@ -1,9 +1,11 @@
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ItemSlider = ({ items, currentIndex, setCurrentIndex, stack }: any) => {
   const sliderRef = useRef(null);
+  const router = useRouter();
   const [dragStartX, setDragStartX] = useState(0);
   const [dragging, setDragging] = useState(false);
 
@@ -36,6 +38,9 @@ const ItemSlider = ({ items, currentIndex, setCurrentIndex, stack }: any) => {
     }
   };
 
+  const getDetail = (itemId: any) => {
+    router.push(`/product/${itemId}`);
+  };
 
   return (
     <div
@@ -54,10 +59,10 @@ const ItemSlider = ({ items, currentIndex, setCurrentIndex, stack }: any) => {
         style={{ transform: `translateX(-${currentIndex * (100 / 5)}%)` }}
       >
         {items.map((item: any) => (
-          <div key={item.id} className="h-80">
+          <div key={item.id} className="h-80" onClick={e => getDetail(item.id)}>
             <div
               className="relative w-64 h-64 bg-gray-200 mr-4 mt-10 group cursor-pointer"
-              style={{ backgroundImage: item.images !== null ?`url('${item.images[0]}')`: `url(https://dummyjson.com/image/400x200/008080/ffffff?text=${item.title.replace(/ /g, '+')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              style={{ backgroundImage: item.images !== null ? `url('${item.images[0]}')` : `url(https://dummyjson.com/image/400x200/008080/ffffff?text=${item.title.replace(/ /g, '+')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
             >
               <div className="absolute top-2 left-2 w-[55px] h-[26px] bg-[#DB4444] flex items-center justify-center text-white text-xs rounded">
                 <span>{item.discountPercentage}%</span>
