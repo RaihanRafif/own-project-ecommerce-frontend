@@ -24,6 +24,10 @@ const config: Config = {
       flex: {
         "1-1-50": "1 1 50%",
       },
+      boxShadow: {
+        "custom-header":
+          "1px -1px 1px 1px rgba(0, 0, 0, 0.1), 1px 1px 1px 1px rgba(0, 0, 0, 0.1)",
+      },
     },
   },
   plugins: [flowbite.plugin()],
