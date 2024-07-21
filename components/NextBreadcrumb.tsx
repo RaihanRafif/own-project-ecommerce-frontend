@@ -42,8 +42,9 @@ const NextBreadcrumb = ({
                         const isLast = index === pathNames.length - 1
                         const itemClasses = isLast ? `${'text-[#7D8184] mr-2 ml-2'} ${activeClasses} font-bold` : 'text-[#7D8184] mr-2 ml-2'
                         const itemLink = capitalizeLinks ? link[0].toUpperCase() + link.slice(1) : link
-                        const displayText = isLast && productName ? productName : itemLink
+                        let displayText = isLast && productName ? productName : itemLink
 
+                        displayText == "Account" ? displayText = "My Account" : ''
                         return (
                             <React.Fragment key={index}>
                                 <li className={itemClasses}>
